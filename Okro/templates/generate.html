@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Okro Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/head.css') }}" rel="stylesheet">
+	 <style>
+              .tab-pane{
+            height:300px;
+            overflow-y:scroll;
+            width:100%;
+          }
+          
+      #head {
+        background: #f4f4f4 url("{{ url_for('static', filename='img/bg_head.jpg') }}" ) top center;
+      }
+	  </style>
+
+  </head>
+  <body class="home">
+
+    <header id="header">
+      <div id="head" class="parallax" parallax-speed="2">
+        <h1 id="logo" class="text-center">
+          <img class="img-circle" src="{{ url_for('static', filename='img/download.jpg') }}" alt="">
+          <span class="title">Team Okro</span>
+          <span class="tagline">Members<br>
+            <a href=""></a>Prince Alfred Gyan, Ismail Dawud Ibrahim, Franklin Luther, Francis Billa </span>
+        </h1>
+      </div>
+      <div class="container" id="head_container">
+          <nav>
+            <ul class="horizontal">
+                <a href="{{url_for('index')}}"><button id="btn2">Home</button></a>
+               <a href="{{url_for('gene')}}"> <button id="active">Generator</button></a>
+            </ul>
+          </nav>
+  </div>
+      
+    </header>
+    
+<main id="main">
+  <div class="row section featured topspace">
+    <h2 class="section-title"><span>Generator</span>
+    </h2>
+  </div>
+	<div class="container">
+		<div class="row section topspace">
+			<div class="col-md-12">
+				<p class="lead text-center text-muted">Generate set of data that applies to the Benford's. </p>
+            </div>
+        </div>
+        <form action ="{{ url_for('generator') }}" method = "POST" >
+            Minimum <input type="number" name="dataMin" value="{{ request.form.dataMin }}" value="1" size="2" >
+			Maximum <input type="number" name="dataMax" value="{{ request.form.Max }}" value="1" size="2" >
+            Data Size <input type="number" name="dataSize" value="{{ request.form.dataSize }}" value="1" size="2" >
+            <input type="submit" value="Generate" class="btn-success btn-lg">
+        </form>	
+ 
+    </div><!-- / section -->
+		
+		
+    <div class="container">
+    <div class="row section recentworks topspace">
+			
+	<h2 class="section-title"><span>Data Generated</span></h2>
+	
+		<div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="tab-pane" style="width: 50%;border: 6px dotted green;margin-left: 30%;margin-bottom: 6%;">
+  		{% for value in result%}
+			<p class="small text-center"><b>{{ value }}</b></p>
+		{% endfor %}
+</div>
+    </div>
+    <div class="container" style="margin:3%;margin-left: 40%;">
+      <a href="{{ url_for('download_csv_generate') }}" class="btn-lg btn-dark" >Download .csv</a>
+    </div>
+	</div>
+</div>
+</main>
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6 widget">
+				<h2>Team Members</h2>
+				<div class="widget-body">
+					<p>Ismail, Dawud Ibrahim <br>
+            Francis Billa<br>
+            Prince Alfred Gyan<br>
+            Franklin Luther<br>
+          </p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2018, Okro<br> 
+            Website: <a href="http://www.github.com/Okro/okro_app" rel="designer">Github</a> <br>
+            Website: <a href="http://www.gitlab.com/Okro/okro_app" rel="designer">Gitlab</a> </p>
+				</div>
+			</div>
+
+		</div> <!-- /row of widgets --> 
+	</div>
+</footer>
+   
+    <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/template.js') }}"></script>
+ 
+ </body>
+</html>
+

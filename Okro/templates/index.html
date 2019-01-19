@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Okro Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+   
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/head.css') }}" rel="stylesheet">
+    <style>
+     #head {
+        background: #f4f4f4 url("{{ url_for('static', filename='img/bg_head.jpg') }}" ) top center;
+      }
+	  </style>
+
+  </head>
+  <body class="home">
+
+    <header id="header">
+      <div id="head" class="parallax" parallax-speed="2">
+        <h1 id="logo" class="text-center">
+          <img class="img-circle" src="{{ url_for('static', filename='img/download.jpg') }}" alt="">
+          <span class="title">Team Okro</span>
+          <span class="tagline">Members<br>
+            <a href="#"></a>Prince Alfred Gyan, Ismail Dawud Ibrahim, Franklin Luther, Francis Billa </span>
+        </h1>
+      </div>
+      
+      <div class="container" id="head_container">
+            <nav>
+              <ul class="horizontal">
+                  <a href="{{url_for('index')}}"><button id="active">Home</button></a>
+               <a href="{{url_for('gene')}}"> <button id="btn2">Generator</button></a>
+              </ul>
+            </nav>
+    </div>
+
+    </header>
+
+    
+<main id="main">
+  <div class="row section featured topspace">
+    <h2 class="section-title"><span>Project: Benford's Law</span>
+    </h2>
+  </div>
+	<div class="container">
+		<div class="row section topspace">
+			<div class="col-md-12">
+				<p class="lead text-center text-muted">Benford's Law is an observation about the leading digits of the numbers found in real-world data sets. Intuitively, one might expect that the leading digits of these numbers would be uniformly distributed, so that each of the digits from 1 to 9 are equally likely to appear. In fact, it is often the case that 1 occurs more frequently than 2, 2 more frequently than 3, and so on. This observation is a simplified version of Benford's law. More precisely, the law gives a prediction of frequency of leading digits using base-10 logarithms that predicts specific frequencies which decrease as the digits increase from 1 to 9</p>
+      </div>
+		</div> <!-- / section -->
+		
+		<div class="row section featured topspace" >
+			<h2 class="section-title"><span>Upload CSV file</span></h2>
+			<form action ="{{ url_for('uploader') }}" method = "POST" enctype = "multipart/form-data" style="margin-left: 40%;">
+  		<div class="form-group" >
+    		<input type="file" class="form-control-file " id="exampleFormControlFile1"  name="file" >
+		    
+      </div>
+      <input type = "submit" value="Upload" class="btn-success btn-lg text-center" >
+	 </form>
+</div> <!-- / section -->
+
+
+    <div class="row section recentworks topspace">
+			
+			<h2 class="section-title"><span>Results</span></h2>
+      {% if check== True %}
+      <h3 class="section-title" style="color:green;">This Data Applies to the Benford Law</h3>
+      {% elif check == False %}
+      <h3 class="section-title" style="color:firebrick;">This Data Not Applies to the Benford Law</h3>
+      {% endif%}
+<table class="table table-bordered" id="demo">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">COUNT</th>
+      <th scope="col">PERCENTAGE</th>
+      <th scope="col">EXPECTATION</th>
+      <th scope="col">DEVIATION</th>
+    </tr>
+  </thead>
+  <tbody>
+	 {% for datum in data %}
+    <tr>
+      <th scope="row">{{ datum[4] }}</th>
+      <td>{{ datum[0] }}</td>
+      <td>{{ datum[1] }}%</td>
+      <td>{{ datum[2] }}%</td>
+      <td>{{ datum[3] }}%</td>
+    </tr>
+	{% endfor %}
+      
+  </tbody>
+</table>
+    			<!--	</div> -->
+    <!--	</div> -->
+
+  </div> <!-- /results -->
+
+  <div class="row section recentworks topspace">
+			
+    <h2 class="section-title"><span>Results Chart</span></h2>
+    
+    <div class="thumbnails recentworks row">
+      
+     <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="Chart">-->
+         <div class="row section recentworks topspace" id="Chart">
+              <!-- Draw Chart Here-->
+        <div class="row">
+            <canvas id="myChart" width="800" height="500"></canvas>
+        </div>
+
+
+
+      </div>
+    </div>
+</div> <!-- /charts -->
+</main>
+<footer id="underfooter" style="width: 100%;">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-6 widget">
+				<h2>Team Members</h2>
+				<div class="widget-body">
+					
+					<p>Ismail, Dawud Ibrahim <br>
+            Francis Billa<br>
+            Prince Alfred Gyan<br>
+            Franklin Luther<br>
+          </p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2018, Okro<br> 
+            Website: <a href="http://www.github.com/Okro/okro_app" rel="designer">Okro on Github</a> <br>
+            Website: <a href="http://www.gitlab.com/Okro/okro_app" rel="designer">Okro on Gitlab</a> </p>
+				</div>
+			</div>
+
+		</div> <!-- /row of widgets -->
+	</div>
+</footer>
+   
+    <!-- Bootstrap core JavaScript -->
+  <!-- chartJs js load-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/template.js') }}"></script>
+  <script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+  
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 20;
+    Chart.defaults.global.defaultFontColor = '#777';
+    
+	  let res =  {{ jsData}};
+    let massPopChart = new Chart(myChart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        datasets:[{
+          label:'Percentages',
+          data:res
+          ,
+          //backgroundColor:'green',
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(0, 206, 0, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+			'rgba(148, 0, 211, 0.6)',
+			'rgba(75, 0, 134, 0.6)',
+            'rgba(255, 0, 0, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          text:'Benford law Distribution Chart',
+          fontSize:20
+        },
+        legend:{
+          display:true,
+          position:'cover',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:5,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+  </script>
+  
+    </div>
+    </main>
+  </body>
+</html>
+

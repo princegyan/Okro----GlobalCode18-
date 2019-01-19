@@ -1,0 +1,42 @@
+#head {
+    background: #f4f4f4 url("{{ url_for('static', filename='img/bg_head.jpg') }}" ) top center;
+  }
+  .navbar-toggle {
+  float: left !important;
+  margin-left: 15px;
+}
+
+.navbar-header.navbar-right.pull-right {
+  margin-right: 15px;
+}
+
+.navbar-right > li {
+  float: left;
+}
+#head_container{
+    width:30%;
+    margin-top: 20px;
+}
+
+#active{
+    background-color: green;
+    color: #fff;
+    width: 40%;
+    border: none;
+    height: 50px;
+    margin: 0px 20px;
+}
+#btn2{
+    background-color: grey;
+    color: #fff;
+    width: 40%;
+    border: none;
+    height: 50px;
+}
+        
+ @media screen and (max-width: 408px) {
+    .rightli {
+         display:none;
+         }
+    }
+            
